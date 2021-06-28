@@ -17,55 +17,70 @@
 }
 
 @mixin color($config-or-theme) {
-  $config: theming.get-color-config($config-or-theme);
-  $primary: map.get($config, primary);
-  $accent: map.get($config, accent);
-  $warn: map.get($config, warn);
-  $background: map.get($config, background);
-  $foreground: map.get($config, foreground);
+    $config: theming.get-color-config($config-or-theme);
+    $primary: map.get($config, primary);
+    $accent: map.get($config, accent);
+    $warn: map.get($config, warn);
+    $background: map.get($config, background);
+    $foreground: map.get($config, foreground);
 
-  .mat-radio-outer-circle {
-    border-color: theming.get-color-from-palette($foreground, secondary-text);
-  }
+    $secondary: map.get($config, secondary);
+    $tertiary: map.get($config, tertiary);
+    $quaternary: map.get($config, quaternary);
 
-  .mat-radio-button {
-    &.mat-primary {
-      @include _color($primary);
+    .mat-radio-outer-circle {
+        border-color: theming.get-color-from-palette($foreground, secondary-text);
     }
 
-    &.mat-accent {
-      @include _color($accent);
+    .mat-radio-button {
+        &.mat-primary {
+            @include _color($primary);
+        }
+
+        &.mat-accent {
+            @include _color($accent);
+        }
+
+        &.mat-warn {
+            @include _color($warn);
+        }
+
+        &.mat-secondary {
+            @include _color($secondary);
+        }
+
+        &.mat-tertiary {
+            @include _color($tertiary);
+        }
+
+        &.mat-quaternary {
+            @include _color($quaternary);
+        }
+
+        // This needs extra specificity, because the classes above are combined
+        // (e.g. `.mat-radio-button.mat-accent`) which increases their specificity a lot.
+        // TODO: consider making the selectors into descendants (`.mat-primary .mat-radio-button`).
+        &.mat-radio-disabled {
+            &.mat-radio-checked .mat-radio-outer-circle,
+            .mat-radio-outer-circle {
+                border-color: theming.get-color-from-palette($foreground, disabled);
+            }
+
+            .mat-radio-ripple .mat-ripple-element,
+            .mat-radio-inner-circle {
+                background-color: theming.get-color-from-palette($foreground, disabled);
+            }
+
+            .mat-radio-label-content {
+                color: theming.get-color-from-palette($foreground, disabled);
+            }
+        }
+        // Switch this to a solid color since we're using `opacity`
+        // to control how opaque the ripple should be.
+        .mat-ripple-element {
+            background-color: map.get($foreground, base);
+        }
     }
-
-    &.mat-warn {
-      @include _color($warn);
-    }
-
-    // This needs extra specificity, because the classes above are combined
-    // (e.g. `.mat-radio-button.mat-accent`) which increases their specificity a lot.
-    // TODO: consider making the selectors into descendants (`.mat-primary .mat-radio-button`).
-    &.mat-radio-disabled {
-      &.mat-radio-checked .mat-radio-outer-circle,
-      .mat-radio-outer-circle {
-        border-color: theming.get-color-from-palette($foreground, disabled);
-      }
-
-      .mat-radio-ripple .mat-ripple-element,
-      .mat-radio-inner-circle {
-        background-color: theming.get-color-from-palette($foreground, disabled);
-      }
-
-      .mat-radio-label-content {
-        color: theming.get-color-from-palette($foreground, disabled);
-      }
-    }
-
-    // Switch this to a solid color since we're using `opacity`
-    // to control how opaque the ripple should be.
-    .mat-ripple-element {
-      background-color: map.get($foreground, base);
-    }
-  }
 }
 
 @mixin typography($config-or-theme) {

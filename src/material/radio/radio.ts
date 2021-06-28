@@ -638,6 +638,9 @@ export abstract class _MatRadioButtonBase extends _MatRadioButtonMixinBase imple
     '[class.mat-radio-disabled]': 'disabled',
     '[class._mat-animation-noopable]': '_noopAnimations',
     '[class.mat-primary]': 'color === "primary"',
+    '[class.mat-secondary]': 'color === "secondary"',
+    '[class.mat-tertiary]': 'color === "tertiary"',
+    '[class.mat-quaternary]': 'color === "quaternary"',
     '[class.mat-accent]': 'color === "accent"',
     '[class.mat-warn]': 'color === "warn"',
     // Needs to be removed since it causes some a11y issues (see #21266).
