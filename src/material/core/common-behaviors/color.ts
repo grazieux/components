@@ -31,7 +31,7 @@ export interface HasElementRef {
 }
 
 /** Possible color palette values. */
-export type ThemePalette = 'primary' | 'accent' | 'warn' | undefined;
+export type ThemePalette = 'primary' | 'accent' | 'warn' | 'secondary' | 'tertiary' | 'quaternary' | undefined;
 
 /** Mixin to augment a directive with a `color` property. */
 export function mixinColor<T extends AbstractConstructor<HasElementRef>>(
